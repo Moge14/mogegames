@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuff Jet - Download</title>
+<meta name="description" content="Tuff Jet is a top-down jet shooter. Download it for Windows or Apple Silicon Macs.">
+<style>
+  :root {
+    --bg: #141822;
+    --grid: #1e2330;
+    --panel: #1b2030;
+    --text: #e8ebf2;
+    --muted: #98a0b5;
+    --jet: #50a0f0;
+    --bullet: #f0d23c;
+    --enemy: #46d2dc;
+    --mono: Consolas, "SF Mono", Menlo, "Courier New", monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    color: var(--text);
+    font: 17px/1.6 var(--sans);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px);
+    background-size: 100% 40px;
+  }
+  main { max-width: 880px; margin: 0 auto; padding: 32px 20px 64px; }
+  .site { font: 700 15px var(--mono); color: var(--muted); letter-spacing: .04em; }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: 32px;
+    align-items: center;
+    padding: 56px 0 40px;
+  }
+  h1 {
+    font: 800 clamp(44px, 9vw, 84px)/1 var(--mono);
+    margin: 0 0 16px;
+    letter-spacing: -.02em;
+  }
+  .tagline { max-width: 34em; margin: 0 0 8px; font-size: 19px; }
+  .status { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .art { position: relative; width: 100px; height: 280px; margin: 0 auto; }
+  .art svg { position: absolute; left: 50%; transform: translateX(-50%); }
+  .enemy { top: 0; }
+  .player { bottom: 0; }
+  .shot {
+    position: absolute; left: 50%; bottom: 100px;
+    width: 8px; height: 8px; margin-left: -4px;
+    border-radius: 50%; background: var(--bullet);
+    opacity: 0;
+    animation: fire 1.2s linear infinite;
+  }
+  .shot:nth-of-type(3) { animation-delay: .3s; }
+  .shot:nth-of-type(4) { animation-delay: .6s; }
+  .shot:nth-of-type(5) { animation-delay: .9s; }
+  @keyframes fire {
+    0%   { transform: translateY(0); opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(-140px); opacity: 0; }
+  }
+
+  h2 { font: 700 24px var(--mono); margin: 0 0 16px; }
+  section { padding: 24px 0; }
+
+  .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .dl {
+    display: block;
+    padding: 18px 20px;
+    border-radius: 6px;
+    background: var(--bullet);
+    color: #14161c;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 19px;
+    transition: transform .12s;
+  }
+  .dl small { display: block; font-weight: 400; font-size: 14px; margin-top: 2px; }
+  .dl:hover { transform: translateY(-2px); }
+  a:focus-visible { outline: 3px solid var(--jet); outline-offset: 3px; }
+
+  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+  dl { margin: 0; display: grid; grid-template-columns: 7.5em 1fr; gap: 8px 16px; }
+  dt { font: 700 15px var(--mono); color: var(--jet); }
+  dd { margin: 0; }
+  kbd { font: 15px var(--mono); background: var(--panel); border: 1px solid var(--grid); border-radius: 4px; padding: 1px 6px; }
+  .help p { margin: 0 0 12px; }
+  .help b { color: var(--text); }
+  .note { color: var(--muted); font-size: 15px; }
+  code { font: 14px var(--mono); background: var(--panel); padding: 1px 6px; border-radius: 4px; }
+  footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; padding-top: 32px; }
+    .art { order: -1; height: 220px; margin: 0; }
+    .art svg { left: 50px; }
+    .shot { left: 50px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shot { animation: none; opacity: 1; }
+    .shot:nth-of-type(n+3) { display: none; }
+    .shot:nth-of-type(2) { transform: translateY(-80px); }
+    .dl { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="site">JACKRABBIT GAMES</div>
+
+  <header class="hero">
+    <div>
+      <h1>Tuff Jet</h1>
+      <p class="tagline">A top-down jet shooter. Dodge debris, shoot down enemy fighters, and spend your coins on eight upgrades.</p>
+      <p class="status">Version 1.0, still in development.</p>
+    </div>
+    <div class="art" aria-hidden="true">
+      <svg class="enemy" width="48" height="48" viewBox="0 0 34 34">
+        <polygon points="17,34 0,0 17,10 34,0" fill="#46d2dc" stroke="#f0f0f0" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      <span class="shot"></span><span class="shot"></span><span class="shot"></span><span class="shot"></span>
+      <svg class="player" width="72" height="92" viewBox="-2 -2 40 50">
+        <polygon points="18,0 0,46 18,34 36,46" fill="#50a0f0" stroke="#f0f0f0" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </header>
+
+  <section id="download">
+    <h2>Download</h2>
+    <div class="downloads">
+      <a class="dl" href="https://github.com/Moge14/tuffjet/releases/download/1.0/TuffJet-windows.zip">
+        Download for Windows
+        <small>TuffJet-windows.zip, about 14 MB</small>
+      </a>
+      <a class="dl" href="https://github.com/Moge14/tuffjet/releases/download/1.0/TuffJet.zip">
+        Download for Mac
+        <small>Apple Silicon (M1 and later), about 48 MB</small>
+      </a>
+    </div>
+  </section>
+
+  <section class="two">
+    <div>
+      <h2>Controls</h2>
+      <dl>
+        <dt>Move</dt><dd><kbd>Arrow keys</kbd> or <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></dd>
+        <dt>Fire</dt><dd><kbd>Space</kbd></dd>
+        <dt>Upgrades</dt><dd><kbd>U</kbd> opens the shop, then <kbd>1</kbd> to <kbd>8</kbd> buys</dd>
+        <dt>Restart</dt><dd><kbd>R</kbd> after game over</dd>
+        <dt>Quit</dt><dd><kbd>Esc</kbd></dd>
+      </dl>
+      <p class="note">Progress resets every time you close the game.</p>
+    </div>
+
+    <div class="help">
+      <h2>If it won't open</h2>
+      <p>The game isn't code-signed yet, so both systems warn you the first time.</p>
+      <p><b>Windows:</b> unzip, then run <code>TuffJet.exe</code>. If you see "Windows protected your PC", click <b>More info</b>, then <b>Run anyway</b>.</p>
+      <p><b>Mac:</b> unzip, then right-click the app and choose <b>Open</b>. If macOS says it is damaged or blocked, go to <b>System Settings &gt; Privacy &amp; Security</b> and click <b>Open Anyway</b>.</p>
+      <p class="note">The Mac build doesn't run on Intel Macs.</p>
+    </div>
+  </section>
+
+  <footer>
+    <!-- To add another game, copy the h1 hero block and the download section, then change the text and links. -->
+    Made by Oli. More games coming.
+  </footer>
+</main>
+</body>
+</html>
