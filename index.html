@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Jackrabbit Games - Tuff Jet and Getaway Chase</title>
-<meta name="description" content="Free games by Oli. Download Tuff Jet and Getaway Chase for Windows or Apple Silicon Macs.">
+<title>Jackrabbit Games - Tuff Jet, Getaway Chase and Echo</title>
+<meta name="description" content="Free games by Oli. Download Tuff Jet, Getaway Chase and Echo for Windows or Apple Silicon Macs.">
 <style>
   * { box-sizing: border-box; }
   html { background: #0e0f12; }
@@ -48,9 +48,10 @@
   .tj .dl { display: block; padding: 18px 20px; border-radius: 6px; background: var(--bullet); color: #14161c; text-decoration: none; font-weight: 700; font-size: 19px; transition: transform .12s; }
   .tj .dl small { display: block; font-weight: 400; font-size: 14px; margin-top: 2px; }
   .tj .dl:hover { transform: translateY(-2px); }
-  .tj dl { margin: 0; display: grid; grid-template-columns: 7.5em 1fr; gap: 8px 16px; }
-  .tj dt { font: 700 15px Consolas, "SF Mono", Menlo, monospace; color: var(--jet); }
-  .tj dd { margin: 0; }
+  .tj dl, .ec dl { margin: 0; display: grid; grid-template-columns: 7.5em 1fr; gap: 8px 16px; }
+  .tj dt, .ec dt { font: 700 15px Consolas, "SF Mono", Menlo, monospace; }
+  .tj dt { color: var(--jet); }
+  .tj dd, .ec dd { margin: 0; }
   .tj kbd { background: #1b2030; border: 1px solid #1e2330; }
   .tj .note { color: var(--muted); font-size: 15px; margin: 12px 0 0; }
 
@@ -99,6 +100,34 @@
   .gc kbd { background: #2c2f37; border: 1px solid #3a3e4a; border-bottom-width: 3px; }
   .gc .note { color: var(--muted); font-size: 15px; margin: 14px 0 0; }
 
+  /* ---------- Echo: pale graph paper, ink outlines, violet ghost trails ---------- */
+  .ec {
+    --ink: #1c1738; --violet: #5a3fe0; --muted: #524b7a;
+    background: linear-gradient(90deg, #d9d4ee 1px, transparent 1px) 0 0 / 40px 100%, linear-gradient(#d9d4ee 1px, transparent 1px) 0 0 / 100% 40px, #ebe8f7;
+    color: var(--ink);
+    padding: 48px 0 56px;
+  }
+  .ec .hero { display: grid; grid-template-columns: 1fr 240px; gap: 32px; align-items: center; padding: 32px 0; }
+  .ec h2 { font: 900 clamp(64px, 14vw, 120px)/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: -.05em; margin: 0 0 20px; text-shadow: 12px 0 0 rgba(90,63,224,.5), 24px 0 0 rgba(90,63,224,.28), 36px 0 0 rgba(90,63,224,.12); }
+  .ec .tagline { max-width: 34em; margin: 0 0 8px; font-size: 19px; }
+  .ec .status { margin: 0; color: var(--muted); font-size: 15px; }
+  .ec .stage { position: relative; width: 200px; height: 140px; margin: 0 auto; }
+  .ec .stage i { position: absolute; left: 0; top: 0; width: 32px; height: 32px; border: 3px solid var(--violet); border-radius: 6px; background: rgba(90,63,224,.15); animation: loop 4s linear infinite; }
+  .ec .stage i:nth-child(1) { background: var(--ink); border-color: var(--ink); animation-delay: -1.5s; }
+  .ec .stage i:nth-child(2) { opacity: .75; animation-delay: -1s; }
+  .ec .stage i:nth-child(3) { opacity: .5; animation-delay: -.5s; }
+  .ec .stage i:nth-child(4) { opacity: .25; }
+  @keyframes loop { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(168px, 0); } 50% { transform: translate(168px, 108px); } 75% { transform: translate(0, 108px); } }
+  .ec h3 { font: 800 24px system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0 0 16px; }
+  .ec .block { padding: 20px 0; }
+  .ec .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; max-width: 720px; }
+  .ec .dl { display: block; padding: 18px 20px; border-radius: 6px; background: var(--ink); color: #ebe8f7; text-decoration: none; font-weight: 700; font-size: 19px; transition: transform .12s; }
+  .ec .dl small { display: block; font-weight: 400; font-size: 14px; margin-top: 2px; }
+  .ec .dl:hover { transform: translateY(-2px); }
+  .ec dt { color: var(--violet); }
+  .ec kbd { background: #fff; border: 1px solid var(--ink); border-bottom-width: 3px; }
+  .ec .note { color: var(--muted); font-size: 15px; margin: 12px 0 0; }
+
   /* ---------- shared help + footer ---------- */
   .help { background: #0e0f12; padding: 44px 0 20px; }
   .help h3 { font: 700 22px Consolas, "SF Mono", Menlo, monospace; margin: 0 0 12px; }
@@ -116,7 +145,9 @@
     .tj .art svg, .tj .shot { left: 50px; }
     .gc .hero { grid-template-columns: 1fr; gap: 24px; }
     .road { height: 300px; margin: 0; }
-    .gc li, .tj dl { grid-template-columns: 6.5em 1fr; }
+    .ec .hero { grid-template-columns: 1fr; }
+    .ec .stage { margin: 0; }
+    .gc li, .tj dl, .ec dl { grid-template-columns: 6.5em 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
     .tj .shot { animation: none; opacity: 1; }
@@ -124,7 +155,11 @@
     .tj .shot:nth-of-type(2) { transform: translateY(-80px); }
     .gc::before, .road i, .road .oncoming, .road .cop, .lb { animation: none; }
     .road .oncoming { transform: translateY(70px); }
-    .tj .dl, .gc .dl { transition: none; }
+    .ec .stage i { animation: none; }
+    .ec .stage i:nth-child(1) { transform: translate(108px, 0); }
+    .ec .stage i:nth-child(2) { transform: translate(72px, 0); }
+    .ec .stage i:nth-child(3) { transform: translate(36px, 0); }
+    .tj .dl, .gc .dl, .ec .dl { transition: none; }
   }
 </style>
 </head>
@@ -144,6 +179,7 @@
     <nav aria-label="Games">
       <a href="#tuff-jet">Tuff Jet</a>
       <a href="#getaway-chase">Getaway Chase</a>
+      <a href="#echo">Echo</a>
       <a href="#help">Help</a>
     </nav>
   </div>
@@ -249,6 +285,46 @@
         <li><span>Restart</span><span><kbd>R</kbd> after you're wrecked</span></li>
       </ul>
       <p class="note">Oncoming traffic is in the left lanes. Your best score is saved on your computer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ECHO ===================== -->
+<section class="ec" id="echo">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <h2>echo</h2>
+        <p class="tagline">A puzzle game where you team up with your past selves. Every run you finish replays as a ghost, so leave one on a plate to hold the door for the next you.</p>
+        <p class="status">Prototype, still in development.</p>
+      </div>
+      <div class="stage" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="block">
+      <h3>Download</h3>
+      <div class="downloads">
+        <a class="dl" href="https://github.com/Moge14/echo-game/releases/latest/download/Echo-windows.zip">
+          Download for Windows
+          <small>Echo-windows.zip, always the latest version</small>
+        </a>
+        <a class="dl" href="https://github.com/Moge14/echo-game/releases/latest/download/Echo-mac-mseries.zip">
+          Download for Mac
+          <small>Apple Silicon (M1 and later), always the latest version</small>
+        </a>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Controls</h3>
+      <dl>
+        <dt>Move</dt><dd><kbd>Arrow keys</kbd> or <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></dd>
+        <dt>Save run</dt><dd><kbd>Space</kbd> turns this run into a ghost and starts a new one</dd>
+        <dt>Restart</dt><dd><kbd>R</kbd> clears your ghosts for this room</dd>
+        <dt>New levels</dt><dd><kbd>N</kbd> picks a new random seed</dd>
+        <dt>Quit</dt><dd><kbd>Esc</kbd></dd>
+      </dl>
+      <p class="note">Levels are built from rooms that are solved and re-checked before you see them, so every one can be finished.</p>
     </div>
   </div>
 </section>
