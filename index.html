@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Jackrabbit Games - Tuff Jet, Getaway Chase and Echo</title>
-<meta name="description" content="Free games by Oli. Download Tuff Jet, Getaway Chase and Echo for Windows or Apple Silicon Macs.">
+<title>Jackrabbit Games - Tuff Jet, Getaway Chase, Echo and Tank Wars</title>
+<meta name="description" content="Free games by Oli. Download Tuff Jet, Getaway Chase, Echo and Tank Wars for Windows or Apple Silicon Macs.">
 <style>
   * { box-sizing: border-box; }
   html { background: #0e0f12; }
@@ -19,7 +19,7 @@
   .top { background: #0e0f12; border-bottom: 1px solid #23252b; }
   .top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
   .brand { font: 700 15px Consolas, "SF Mono", Menlo, monospace; letter-spacing: .06em; color: #aeb4c4; }
-  .top nav { display: flex; gap: 20px; font-size: 15px; }
+  .top nav { display: flex; gap: 20px; font-size: 15px; flex-wrap: wrap; }
   .top nav a { color: #e8ebf2; text-decoration: none; border-bottom: 2px solid transparent; }
   .top nav a:hover { border-bottom-color: #f0d23c; }
 
@@ -48,10 +48,10 @@
   .tj .dl { display: block; padding: 18px 20px; border-radius: 6px; background: var(--bullet); color: #14161c; text-decoration: none; font-weight: 700; font-size: 19px; transition: transform .12s; }
   .tj .dl small { display: block; font-weight: 400; font-size: 14px; margin-top: 2px; }
   .tj .dl:hover { transform: translateY(-2px); }
-  .tj dl, .ec dl { margin: 0; display: grid; grid-template-columns: 7.5em 1fr; gap: 8px 16px; }
+  .tj dl, .ec dl, .tw dl { margin: 0; display: grid; grid-template-columns: 7.5em 1fr; gap: 8px 16px; }
   .tj dt, .ec dt { font: 700 15px Consolas, "SF Mono", Menlo, monospace; }
   .tj dt { color: var(--jet); }
-  .tj dd, .ec dd { margin: 0; }
+  .tj dd, .ec dd, .tw dd { margin: 0; }
   .tj kbd { background: #1b2030; border: 1px solid #1e2330; }
   .tj .note { color: var(--muted); font-size: 15px; margin: 12px 0 0; }
 
@@ -128,6 +128,47 @@
   .ec kbd { background: #fff; border: 1px solid var(--ink); border-bottom-width: 3px; }
   .ec .note { color: var(--muted); font-size: 15px; margin: 12px 0 0; }
 
+  /* ---------- Tank Wars: olive drab, stencil lettering, hazard stripes, tread marks ---------- */
+  .tw {
+    --olive: #7d9b55; --olive-dk: #4d6330; --amber: #e2b43a; --muted: #a3ab92; --paper: #eef0e6;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 22px, rgba(255,255,255,.025) 22px 44px),
+      #1d2218;
+    color: var(--paper);
+    padding-bottom: 56px;
+  }
+  .tw::before { content: ""; display: block; height: 10px; background: repeating-linear-gradient(-45deg, var(--amber) 0 14px, #1d2218 14px 28px); }
+  .tw .hero { display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: center; padding: 48px 0 24px; }
+  .tw h2 { font: 700 clamp(44px, 9vw, 80px)/.95 Stencil, "Stencil Std", "Courier New", Courier, monospace; text-transform: uppercase; letter-spacing: .04em; margin: 0 0 18px; color: var(--paper); text-shadow: 4px 4px 0 var(--olive-dk); }
+  .tw .tagline { max-width: 34em; margin: 0 0 8px; font-size: 19px; }
+  .tw .status { margin: 0 0 20px; color: var(--muted); font-size: 15px; }
+  .tw .stats { display: flex; gap: 28px; flex-wrap: wrap; }
+  .tw .stats div { font-size: 14px; color: var(--muted); line-height: 1.2; }
+  .tw .stats b { display: block; font: 700 40px/1 "Courier New", Courier, monospace; color: var(--amber); }
+
+  .tw .field { position: relative; width: 200px; height: 340px; margin: 0 auto; overflow: hidden; border-radius: 4px; background: #2c3322; border: 0 solid #5a6446; border-width: 0 8px; }
+  .tw .field::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; margin-left: -2px; background: linear-gradient(var(--amber) 0 22px, transparent 22px) 0 0 / 4px 44px repeat-y; opacity: .8; animation: tw-scroll .6s linear infinite; }
+  @keyframes tw-scroll { to { background-position-y: 44px; } }
+  .tw .tank { position: absolute; width: 60px; height: 60px; }
+  .tw .tank.foe { left: 24px; top: 28px; transform: rotate(180deg); }
+  .tw .tank.me { right: 24px; bottom: 28px; }
+  .tw .turret { transform-box: view-box; transform-origin: 30px 30px; animation: tw-swing 3s ease-in-out infinite alternate; }
+  .tw .tank.foe .turret { animation-duration: 2.2s; animation-direction: alternate-reverse; }
+  @keyframes tw-swing { from { transform: rotate(-28deg); } to { transform: rotate(28deg); } }
+  .tw .round { position: absolute; right: 52px; bottom: 100px; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); opacity: 0; animation: tw-fire 1.1s linear infinite; }
+  .tw .round:nth-of-type(2) { animation-delay: .55s; }
+  @keyframes tw-fire { 0% { transform: translateY(0); opacity: 1; } 85% { opacity: 1; } 100% { transform: translateY(-170px); opacity: 0; } }
+
+  .tw .block { padding: 20px 0; }
+  .tw h3 { font: 700 24px Stencil, "Stencil Std", "Courier New", Courier, monospace; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 16px; color: var(--amber); }
+  .tw .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .tw .dl { display: block; padding: 16px 20px; background: var(--olive); color: #141810; text-decoration: none; font-weight: 800; font-size: 19px; text-transform: uppercase; letter-spacing: .04em; border-radius: 3px; border-bottom: 5px solid var(--olive-dk); transition: transform .12s; }
+  .tw .dl small { display: block; font-weight: 500; font-size: 14px; text-transform: none; letter-spacing: 0; margin-top: 2px; }
+  .tw .dl:hover { transform: translateY(-2px); }
+  .tw dt { font: 700 15px Consolas, "SF Mono", Menlo, monospace; color: var(--olive); text-transform: uppercase; letter-spacing: .05em; }
+  .tw kbd { background: #2c3322; border: 1px solid #4a5339; border-bottom-width: 3px; }
+  .tw .note { color: var(--muted); font-size: 15px; margin: 12px 0 0; }
+
   /* ---------- shared help + footer ---------- */
   .help { background: #0e0f12; padding: 44px 0 20px; }
   .help h3 { font: 700 22px Consolas, "SF Mono", Menlo, monospace; margin: 0 0 12px; }
@@ -147,7 +188,11 @@
     .road { height: 300px; margin: 0; }
     .ec .hero { grid-template-columns: 1fr; }
     .ec .stage { margin: 0; }
-    .gc li, .tj dl, .ec dl { grid-template-columns: 6.5em 1fr; }
+    .tw .hero { grid-template-columns: 1fr; gap: 24px; }
+    .tw .field { height: 260px; margin: 0; }
+    .tw .tank.me { bottom: 16px; }
+    .tw .round { bottom: 76px; }
+    .gc li, .tj dl, .ec dl, .tw dl { grid-template-columns: 6.5em 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
     .tj .shot { animation: none; opacity: 1; }
@@ -159,7 +204,10 @@
     .ec .stage i:nth-child(1) { transform: translate(108px, 0); }
     .ec .stage i:nth-child(2) { transform: translate(72px, 0); }
     .ec .stage i:nth-child(3) { transform: translate(36px, 0); }
-    .tj .dl, .gc .dl, .ec .dl { transition: none; }
+    .tw .field::before, .tw .turret, .tw .round { animation: none; }
+    .tw .round { opacity: 1; transform: translateY(-80px); }
+    .tw .round:nth-of-type(2) { display: none; }
+    .tj .dl, .gc .dl, .ec .dl, .tw .dl { transition: none; }
   }
 </style>
 </head>
@@ -180,6 +228,7 @@
       <a href="#tuff-jet">Tuff Jet</a>
       <a href="#getaway-chase">Getaway Chase</a>
       <a href="#echo">Echo</a>
+      <a href="#tank-wars">Tank Wars</a>
       <a href="#help">Help</a>
     </nav>
   </div>
@@ -325,6 +374,72 @@
         <dt>Quit</dt><dd><kbd>Esc</kbd></dd>
       </dl>
       <p class="note">Levels are built from rooms that are solved and re-checked before you see them, so every one can be finished.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TANK WARS ===================== -->
+<section class="tw" id="tank-wars">
+  <div class="wrap">
+    <div class="hero">
+      <div class="field" aria-hidden="true">
+        <svg class="tank foe" viewBox="0 0 60 60">
+          <rect x="6" y="6" width="11" height="48" rx="3" fill="#262a30" stroke="#6a7080"/>
+          <rect x="43" y="6" width="11" height="48" rx="3" fill="#262a30" stroke="#6a7080"/>
+          <rect x="14" y="10" width="32" height="40" rx="5" fill="#dc8c32" stroke="#f0f0f0" stroke-width="2"/>
+          <g class="turret">
+            <rect x="27" y="-4" width="6" height="34" fill="#1e2026"/>
+            <circle cx="30" cy="30" r="11" fill="#f0b060" stroke="#f0f0f0" stroke-width="2"/>
+          </g>
+        </svg>
+        <svg class="tank me" viewBox="0 0 60 60">
+          <rect x="6" y="6" width="11" height="48" rx="3" fill="#262a30" stroke="#6a7080"/>
+          <rect x="43" y="6" width="11" height="48" rx="3" fill="#262a30" stroke="#6a7080"/>
+          <rect x="14" y="10" width="32" height="40" rx="5" fill="#50a0f0" stroke="#f0f0f0" stroke-width="2"/>
+          <g class="turret">
+            <rect x="27" y="-4" width="6" height="34" fill="#1e2026"/>
+            <circle cx="30" cy="30" r="11" fill="#78beff" stroke="#f0f0f0" stroke-width="2"/>
+          </g>
+        </svg>
+        <span class="round"></span><span class="round"></span>
+      </div>
+      <div>
+        <h2>Tank Wars</h2>
+        <p class="tagline">Drive your tank down a winding road, dodge or destroy everything that comes at you, and spend your coins on upgrades. Aim with the mouse and hold the trigger.</p>
+        <p class="status">Prototype, still in development.</p>
+        <div class="stats">
+          <div><b>3</b>routes</div>
+          <div><b>4</b>enemy types</div>
+          <div><b>8</b>upgrades</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Download</h3>
+      <div class="downloads">
+        <a class="dl" href="https://github.com/Moge14/tank-wars/releases/latest/download/TankWars-windows.zip">
+          Download for Windows
+          <small>TankWars-windows.zip, always the latest version</small>
+        </a>
+        <a class="dl" href="https://github.com/Moge14/tank-wars/releases/latest/download/TankWars-mac-mseries.zip">
+          Download for Mac
+          <small>Apple Silicon (M1 and later), always the latest version</small>
+        </a>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Controls</h3>
+      <dl>
+        <dt>Drive</dt><dd><kbd>Arrow keys</kbd> or <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></dd>
+        <dt>Aim</dt><dd>Move the mouse to swing the turret</dd>
+        <dt>Fire</dt><dd>Left click or <kbd>Space</kbd>, hold to keep firing</dd>
+        <dt>Upgrades</dt><dd><kbd>U</kbd> opens the shop, then <kbd>1</kbd> to <kbd>8</kbd> buys</dd>
+        <dt>Restart</dt><dd><kbd>R</kbd> after game over</dd>
+        <dt>Quit</dt><dd><kbd>Esc</kbd></dd>
+      </dl>
+      <p class="note">The route changes as you go: Highway, Downtown (watch for convoys at the intersections) and Canyon Road. Leaving the road bogs you down in mud. Your best score is saved on your computer; upgrades reset when you close the game.</p>
     </div>
   </div>
 </section>
