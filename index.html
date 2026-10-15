@@ -23,6 +23,24 @@
   .top nav a { color: #e8ebf2; text-decoration: none; border-bottom: 2px solid transparent; }
   .top nav a:hover { border-bottom-color: #f0d23c; }
 
+  /* ---------- launcher banner + .py prompt ---------- */
+  .launcher { background: #151820; border-bottom: 1px solid #23252b; }
+  .launcher .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px 32px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 22px; }
+  .launcher h2 { font: 700 20px Consolas, "SF Mono", Menlo, monospace; margin: 0 0 4px; }
+  .launcher p { margin: 0; color: #aeb4c4; font-size: 15px; max-width: 34em; }
+  .launcher .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .lbtn { display: inline-block; padding: 12px 20px; border-radius: 6px; border: 2px solid #3a3e4a; background: transparent; color: #e8ebf2; text-decoration: none; font: 700 16px system-ui, -apple-system, "Segoe UI", sans-serif; cursor: pointer; transition: transform .12s; }
+  .lbtn small { display: block; font-weight: 400; font-size: 13px; color: #aeb4c4; }
+  .lbtn:hover { transform: translateY(-2px); border-color: #f0d23c; }
+  .lbtn.main { background: #f0d23c; border-color: #f0d23c; color: #14161c; }
+  .lbtn.main small { color: #3a3510; }
+  dialog.nudge { max-width: 460px; width: calc(100% - 40px); padding: 24px; border: 1px solid #3a3e4a; border-radius: 10px; background: #151820; color: #e8ebf2; }
+  dialog.nudge::backdrop { background: rgba(0,0,0,.65); }
+  dialog.nudge h3 { font: 700 20px Consolas, "SF Mono", Menlo, monospace; margin: 0 0 10px; }
+  dialog.nudge p { margin: 0 0 16px; color: #c3c8d6; font-size: 16px; }
+  dialog.nudge .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  dialog.nudge .btns .plain { margin-left: auto; align-self: center; color: #aeb4c4; font-size: 14px; }
+
   /* ---------- Tuff Jet: blueprint grid, monospace, yellow ---------- */
   .tj {
     --muted: #98a0b5; --jet: #50a0f0; --bullet: #f0d23c;
@@ -207,7 +225,7 @@
     .tw .field::before, .tw .turret, .tw .round { animation: none; }
     .tw .round { opacity: 1; transform: translateY(-80px); }
     .tw .round:nth-of-type(2) { display: none; }
-    .tj .dl, .gc .dl, .ec .dl, .tw .dl { transition: none; }
+    .tj .dl, .gc .dl, .ec .dl, .tw .dl, .lbtn { transition: none; }
   }
 </style>
 </head>
@@ -233,6 +251,36 @@
     </nav>
   </div>
 </header>
+
+<!-- ===================== LAUNCHER ===================== -->
+<section class="launcher" id="launcher" aria-label="Jackrabbit Launcher">
+  <div class="wrap">
+    <div>
+      <h2>Jackrabbit Launcher</h2>
+      <p>One app for all the games. It installs them, keeps them up to date, removes old versions and shows your best scores.</p>
+    </div>
+    <div class="btns">
+      <a class="lbtn" data-os="win" href="https://github.com/Moge14/jackrabbit-launcher/releases/latest/download/JackrabbitLauncher-windows.zip">
+        Get the launcher for Windows
+        <small>JackrabbitLauncher-windows.zip</small>
+      </a>
+      <a class="lbtn" data-os="mac" href="https://github.com/Moge14/jackrabbit-launcher/releases/latest/download/JackrabbitLauncher-mac-mseries.zip">
+        Get the launcher for Mac
+        <small>Apple Silicon (M1 and later)</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<dialog class="nudge" id="py-nudge" aria-labelledby="py-nudge-title">
+  <h3 id="py-nudge-title">Get the launcher instead?</h3>
+  <p>A manual download won't update itself, and you'd have to delete old versions yourself. The launcher installs this game, keeps it current and removes the old version for you.</p>
+  <div class="btns">
+    <a class="lbtn main" id="py-nudge-launcher" href="#launcher">Get the launcher</a>
+    <a class="lbtn" id="py-nudge-file" href="#" download>Download the zip anyway</a>
+    <a class="plain" href="#" id="py-nudge-close">Cancel</a>
+  </div>
+</dialog>
 
 <!-- ===================== TUFF JET ===================== -->
 <section class="tj" id="tuff-jet">
@@ -467,6 +515,41 @@
     Made by Oli. More games coming.
   </div>
 </footer>
+
+<script>
+(function () {
+  // Put the launcher button for the visitor's system first and highlight it.
+  var ua = navigator.userAgent || "", plat = navigator.platform || "";
+  var os = /Win/i.test(plat + ua) ? "win" : /Mac/i.test(plat + ua) ? "mac" : "";
+  var btns = document.querySelector(".launcher .btns");
+  var mine = os && btns.querySelector('[data-os="' + os + '"]');
+  if (mine) { mine.classList.add("main"); btns.insertBefore(mine, btns.firstChild); }
+  else btns.firstElementChild.classList.add("main");
+
+  // When someone clicks a game's download button (a .zip), suggest the launcher first.
+  var dlg = document.getElementById("py-nudge");
+  if (!dlg || typeof dlg.showModal !== "function") return;
+  var fileLink = document.getElementById("py-nudge-file");
+  document.addEventListener("click", function (e) {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var a = e.target.closest && e.target.closest("a[href]");
+    if (!a || a.closest("dialog") || a.closest(".launcher")) return;
+    var path;
+    try { path = new URL(a.href, location.href).pathname; } catch (err) { return; }
+    if (!/\.zip$/i.test(path)) return;
+    e.preventDefault();
+    fileLink.href = a.href;
+    fileLink.setAttribute("download", path.split("/").pop());
+    dlg.showModal();
+  });
+  fileLink.addEventListener("click", function () { dlg.close(); });
+  document.getElementById("py-nudge-launcher").addEventListener("click", function (e) {
+    e.preventDefault(); dlg.close();
+    document.getElementById("launcher").scrollIntoView({ behavior: "smooth" });
+  });
+  document.getElementById("py-nudge-close").addEventListener("click", function (e) { e.preventDefault(); dlg.close(); });
+})();
+</script>
 
 </body>
 </html>
